@@ -1,3 +1,76 @@
+html {
+    font-family: 'Lato', sans-serif;
+}
+
+.header {
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    flex-grow: 1;
+}
+
+.content {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator-cont {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 4px solid black;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 80vw;
+    height: 500px;
+}
+
+.display {
+    margin: 8px;
+    font-size: 48px;
+    text-align: right;
+    padding: 1rem 1rem 4px 1rem;
+    border: 4px solid blueviolet;
+    border-radius: 8px;
+    flex: 0 1 auto;
+}
+
+.btns-cont {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1 1 auto;
+    justify-content: space-evenly;
+}
+
+.btn-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+}
+
+.operator-btn, .number-btn {
+    display: flex;
+    font-size: 24px;
+    border-radius: 50%;
+    padding: 20px;
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 1;
+} 
+
+#operate-btn {
+    margin: 8px;
+    font-size: 28px;
+    border-radius: 8px;
+    border: 4px solid green;
+}
+
 .footer {
     display: flex;
     flex-direction: row;
@@ -10,7 +83,7 @@
     width: 100%;
     background-color: #4fc7ff;
     text-align: center;
-  }
+}
 #githubLink {
     transform: rotate(0deg) scale(1);
     transition: .25s;
@@ -18,4 +91,14 @@
 #githubLink:hover {
     transition: .25s;
     transform: rotate(360deg) scale(1.25);
- }
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+    .operator-btn, .number-btn {
+        width: 60px;
+        height: 60px;
+    }
+}
