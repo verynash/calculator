@@ -10,6 +10,7 @@ body {
     display: flex;
     flex-flow: column nowrap;
     flex-grow: 1;
+    background-color: rgba(128, 128, 128, 0.342);
 }
 
 .content {
@@ -20,13 +21,16 @@ body {
 }
 
 .calculator-cont {
+    padding: 8px;
     display: flex;
     flex-flow: column nowrap;
-    border: 4px solid black;
+    border: 4px solid gray;
     border-radius: 8px;
     max-width: 400px;
     width: 80vw;
     height: 500px;
+    background-color: black;
+    color: white;
 }
 
 .display {
@@ -34,7 +38,7 @@ body {
     font-size: 48px;
     text-align: right;
     padding: 1rem 1rem 4px 1rem;
-    border: 4px solid blueviolet;
+    border: 2px solid gray;
     border-radius: 8px;
     flex: 0 1 auto;
 }
@@ -57,18 +61,34 @@ body {
     font-size: 24px;
     border-radius: 50%;
     padding: 20px;
-    width: 80px;
-    height: 80px;
+    width: 75px;
+    height: 75px;
     justify-content: center;
     align-items: center;
     flex-shrink: 1;
+    border-color: whitesmoke;
+    color: whitesmoke;
+    border-style: solid;
 } 
+.number-btn {
+    background-color: gray;
+}
+
+.operator-btn {
+    background-color: rgb(255, 136, 0);
+}
 
 #operate-btn {
     margin: 8px;
     font-size: 28px;
     border-radius: 8px;
-    border: 4px solid green;
+    border: 4px solid whitesmoke;
+    background-color: rgb(13, 99, 21);
+    color: whitesmoke;
+}
+
+#clear {
+    background-color: rgb(214, 14, 14);
 }
 
 .footer {
@@ -81,7 +101,7 @@ body {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #4fc7ff;
+    background-color: rgb(255, 136, 0);
     text-align: center;
 }
 #githubLink {
