@@ -1,5 +1,5 @@
-function operate(a, b) {
-    
+function operate(operator,a,b) {
+
 }
 
 function add(a,b) {

@@ -1,0 +1,21 @@
+.footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #4fc7ff;
+    text-align: center;
+  }
+#githubLink {
+    transform: rotate(0deg) scale(1);
+    transition: .25s;
+}
+#githubLink:hover {
+    transition: .25s;
+    transform: rotate(360deg) scale(1.25);
+ }
