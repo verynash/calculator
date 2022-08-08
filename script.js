@@ -1,8 +1,8 @@
 const calculator = {
     displayValue: '0',
     firstNumber: null,
-    waitingForSecondOperand: false,
-    operator: null
+    waitingForSecondNumber: false,
+    operator: null,
 }
 
 function updateDisplay() {
@@ -24,22 +24,34 @@ for (const button of buttons) {
             inputValue(target.value)
             updateDisplay()
         }
+        if (target.classList.contains('decimal-btn')) {
+            console.log('decimal', target.value)
+            inputDecimal(target.value);
+            updateDisplay();
+        }
         if (target.classList.contains('operator-btn')) {
             console.log('operator', target.value)
+            inputOperator(target.value);
         } 
         if (target.classList.contains('operate-btn')) {
             console.log('operate', target.value)
+        }
+        if (target.classList.contains('clear-btn')) {
+            console.log('clear', target.value)
         }
     });
 }
 
 function inputValue(number) {
-    let display = calculator.displayValue;
-    calculator.displayValue = display === '0' ? number : display + number;
+    const displayValue = calculator.displayValue;
+    calculator.displayValue = displayValue === '0' ? number : displayValue + number;
 }
 
-
-
+function inputDecimal(period) {
+    if (!calculator.displayValue.includes(period)) {
+        calculator.displayValue += period;
+    }
+}
 
 
 
