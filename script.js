@@ -32,32 +32,60 @@ for (const button of buttons) {
         if (target.classList.contains('operator-btn')) {
             console.log('operator', target.value)
             inputOperator(target.value);
-        } 
+            updateDisplay();
         if (target.classList.contains('operate-btn')) {
-            console.log('operate', target.value)
+            console.log('operator', target.value)
+
         }
         if (target.classList.contains('clear-btn')) {
-            console.log('clear', target.value)
+            resetCalculator();
+            updateDisplay();
         }
-    });
+    }});
 }
 
 function inputValue(number) {
-    const displayValue = calculator.displayValue;
-    calculator.displayValue = displayValue === '0' ? number : displayValue + number;
+    let displayValue = calculator.displayValue;
+    const waitingForSecondNumber = calculator.waitingForSecondNumber;
+    
+    if (waitingForSecondNumber === true) {
+        calculator.displayValue = number;
+        calculator.waitingForSecondNumber = false;
+    } else {
+        calculator.displayValue = displayValue === '0' ? number : displayValue + number;
+    }
+    console.log(calculator)
 }
 
 function inputDecimal(period) {
     if (!calculator.displayValue.includes(period)) {
+        if (calculator.waitingForSecondNumber === true) {
+            calculator.displayValue += 0;
+        }
         calculator.displayValue += period;
     }
 }
 
+function inputOperator(nextOperator) {
+    let firstNumber = calculator.firstNumber;
+    let displayValue = calculator.displayValue;
+    let displayNumber = parseFloat(displayValue);
+
+    if (firstNumber === null && !isNaN(displayNumber)) {
+        calculator.firstNumber = displayNumber;
+    }
+    calculator.waitingForSecondNumber = true;
+    calculator.operator = nextOperator;
+}
 
 
 
-
-
+function resetCalculator() {
+    calculator.displayValue = '0';
+    calculator.firstNumber = null;
+    calculator.waitingForSecondNumber = false;
+    calculator.operator = null;
+}
 
 
 function add(a,b) {
