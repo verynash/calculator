@@ -33,6 +33,7 @@ for (const button of buttons) {
             console.log('operator', target.value)
             inputOperator(target.value);
             updateDisplay();
+        }    
         if (target.classList.contains('operate-btn')) {
             console.log('operator', target.value)
 
@@ -41,8 +42,8 @@ for (const button of buttons) {
             resetCalculator();
             updateDisplay();
         }
-    }});
-}
+    })};
+
 
 function inputValue(number) {
     let displayValue = calculator.displayValue;
