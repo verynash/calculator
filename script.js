@@ -35,7 +35,9 @@ for (const button of buttons) {
             updateDisplay();
         }    
         if (target.classList.contains('operate-btn')) {
-            console.log('operator', target.value)
+            console.log('operate', target.value)
+            calculate();
+            updateDisplay();
 
         }
         if (target.classList.contains('clear-btn')) {
@@ -49,7 +51,11 @@ function inputValue(number) {
     let displayValue = calculator.displayValue;
     const waitingForSecondNumber = calculator.waitingForSecondNumber;
     
-    if (waitingForSecondNumber === true) {
+    if (waitingForSecondNumber === true && displayValue === '0.') {
+        calculator.displayValue = displayValue + number;
+        calculator.waitingForSecondNumber = false;
+    }
+    else if (waitingForSecondNumber === true) {
         calculator.displayValue = number;
         calculator.waitingForSecondNumber = false;
     } else {
@@ -59,10 +65,10 @@ function inputValue(number) {
 }
 
 function inputDecimal(period) {
+    if (calculator.waitingForSecondNumber === true) {
+        calculator.displayValue = '0.';
+    }
     if (!calculator.displayValue.includes(period)) {
-        if (calculator.waitingForSecondNumber === true) {
-            calculator.displayValue += 0;
-        }
         calculator.displayValue += period;
     }
 }
@@ -74,12 +80,30 @@ function inputOperator(nextOperator) {
 
     if (firstNumber === null && !isNaN(displayNumber)) {
         calculator.firstNumber = displayNumber;
+    } else {
+        calculator.firstNumber = displayNumber
     }
     calculator.waitingForSecondNumber = true;
     calculator.operator = nextOperator;
 }
 
-
+function calculate(a, b) {
+    a = calculator.firstNumber;
+    b = calculator.displayValue;
+    if (calculator.operator === "+") {
+        calculator.displayValue = parseFloat(a) + parseFloat(b);
+    }
+    else if (calculator.operator === "-") {
+        calculator.displayValue = parseFloat(a) - parseFloat(b);
+    }
+    else if (calculator.operator === "*") {
+        calculator.displayValue = parseFloat(a) * parseFloat(b);
+    } else if (calculator.operator === "/" && calculator.displayValue === "0") {
+        calculator.displayValue = "Good Try Pal";
+    } else if (calculator.operator === "/") {
+        calculator.displayValue = parseFloat(a) / parseFloat(b);
+    }
+}
 
 function resetCalculator() {
     calculator.displayValue = '0';
