@@ -3,6 +3,7 @@ const calculator = {
     firstNumber: null,
     waitingForSecondNumber: false,
     operator: null,
+    calculated: false,
 }
 
 function updateDisplay() {
@@ -31,6 +32,7 @@ for (const button of buttons) {
         }
         if (target.classList.contains('operator-btn')) {
             console.log('operator', target.value)
+            calculate();
             inputOperator(target.value);
             updateDisplay();
         }    
@@ -77,6 +79,7 @@ function inputOperator(nextOperator) {
     let firstNumber = calculator.firstNumber;
     let displayValue = calculator.displayValue;
     let displayNumber = parseFloat(displayValue);
+    calculator.operator = nextOperator;
 
     if (firstNumber === null && !isNaN(displayNumber)) {
         calculator.firstNumber = displayNumber;
@@ -84,7 +87,6 @@ function inputOperator(nextOperator) {
         calculator.firstNumber = displayNumber
     }
     calculator.waitingForSecondNumber = true;
-    calculator.operator = nextOperator;
 }
 
 function calculate(a, b) {
@@ -103,6 +105,7 @@ function calculate(a, b) {
     } else if (calculator.operator === "/") {
         calculator.displayValue = parseFloat(a) / parseFloat(b);
     }
+    calculator.calculated = true;
 }
 
 function resetCalculator() {
