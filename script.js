@@ -9,6 +9,9 @@ const calculator = {
 function updateDisplay() {
     let display = document.getElementById('display');
     display.textContent = calculator.displayValue;
+    if (display.textContent.length > 10 && display.textContent !== "Good Try Pal") {
+        display.textContent = display.textContent.substring(0,10);
+    }
 }
 
 updateDisplay();
@@ -51,13 +54,17 @@ for (const button of buttons) {
 
 function inputValue(number) {
     let displayValue = calculator.displayValue;
-    const waitingForSecondNumber = calculator.waitingForSecondNumber;
+
+    if (calculator.calculated === true) {
+        displayValue = '0';
+        calculator.calculated = false;
+    }
     
-    if (waitingForSecondNumber === true && displayValue === '0.') {
+    if (displayValue === '0.') {
         calculator.displayValue = displayValue + number;
         calculator.waitingForSecondNumber = false;
     }
-    else if (waitingForSecondNumber === true) {
+    else if (calculator.waitingForSecondNumber === true) {
         calculator.displayValue = number;
         calculator.waitingForSecondNumber = false;
     } else {
@@ -67,8 +74,13 @@ function inputValue(number) {
 }
 
 function inputDecimal(period) {
+    if (calculator.calculated === true) {
+        calculator.displayValue = '0.'
+        calculator.calculated = false;
+    }
     if (calculator.waitingForSecondNumber === true) {
         calculator.displayValue = '0.';
+        calculator.waitingForSecondNumber = false;
     }
     if (!calculator.displayValue.includes(period)) {
         calculator.displayValue += period;
@@ -92,6 +104,9 @@ function inputOperator(nextOperator) {
 function calculate(a, b) {
     a = calculator.firstNumber;
     b = calculator.displayValue;
+    if (calculator.waitingForSecondNumber === true) {
+        return;
+    }
     if (calculator.operator === "+") {
         calculator.displayValue = parseFloat(a) + parseFloat(b);
     }
@@ -105,7 +120,11 @@ function calculate(a, b) {
     } else if (calculator.operator === "/") {
         calculator.displayValue = parseFloat(a) / parseFloat(b);
     }
+
     calculator.calculated = true;
+    calculator.operator = null;
+    calculator.waitingForSecondNumber = false;
+    console.log(calculator);
 }
 
 function resetCalculator() {
